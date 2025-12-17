@@ -18,6 +18,22 @@ const items = [
   },
 ];
 
+const renderContent = (key) => {
+  switch (key) {
+    case "1":
+      return <div>Dashboard Content</div>;
+
+    case "2":
+      return <div>Users Content</div>;
+
+    case "3":
+      return <div>Settings Content</div>;
+
+    default:
+      return <div>Default Content</div>;
+  }
+};
+
 function App() {
   const [selectItem, setSelectItem] = useState("1");
 
@@ -41,7 +57,9 @@ function App() {
             items={items}
           />
         </Sider>
-        <Content style={{ padding: "20px" }}>Main Content</Content>
+        <Content style={{ padding: "20px" }}>
+          {renderContent(selectItem)}
+        </Content>
       </Layout>
     </Layout>
   );
