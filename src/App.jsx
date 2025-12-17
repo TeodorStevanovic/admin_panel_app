@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Layout, Image, Menu } from "antd";
 import LogoAdmin from "./assets/admin-panel-logo.png";
+import Users from "./components/Users";
 
 const { Header, Sider, Content } = Layout;
 const items = [
@@ -24,7 +25,7 @@ const renderContent = (key) => {
       return <div>Dashboard Content</div>;
 
     case "2":
-      return <div>Users Content</div>;
+      return <Users />;
 
     case "3":
       return <div>Settings Content</div>;
