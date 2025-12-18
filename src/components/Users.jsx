@@ -1,7 +1,22 @@
-import React from "react";
-import { Table } from "antd";
+import React, { useState } from "react";
+import { Button, Modal, Form, Table, Input } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 
 const Users = () => {
+  const [modal, setModal] = useState(false);
+
+  const showModal = () => {
+    setModal(true);
+  };
+
+  const handleCancel = () => {
+    setModal(false);
+  };
+
+  const handleOk = () => {
+    setModal(false);
+  };
+
   const dataSource = [
     {
       key: "1",
@@ -35,7 +50,45 @@ const Users = () => {
     },
   ];
 
-  return <Table dataSource={dataSource} columns={columns}/>
+  return (
+    <>
+      <Table dataSource={dataSource} columns={columns} />
+      <Button type="primary" onClick={showModal}>
+        <PlusOutlined />
+      </Button>
+      <Modal
+        title="Basic Modal"
+        open={modal}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <Form>
+          <Form.Item
+            label="Name:"
+            name="name"
+            rules={[{ required: true, message: "Please input name." }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Age"
+            name="age"
+            rules={[{ required: true, message: "Please input age." }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Address"
+            name="address"
+            rules={[{ required: true, message: "Please input address." }]}
+          >
+            <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
+    </>
+  );
 };
 
 export default Users;
