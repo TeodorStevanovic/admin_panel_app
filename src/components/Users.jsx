@@ -4,20 +4,7 @@ import { PlusOutlined } from "@ant-design/icons";
 
 const Users = () => {
   const [modal, setModal] = useState(false);
-
-  const showModal = () => {
-    setModal(true);
-  };
-
-  const handleCancel = () => {
-    setModal(false);
-  };
-
-  const handleOk = () => {
-    setModal(false);
-  };
-
-  const dataSource = [
+  const [dataSource, setDataSource] = useState([
     {
       key: "1",
       name: "Teodor",
@@ -30,7 +17,19 @@ const Users = () => {
       age: 54,
       address: "Velizara Kosanovica",
     },
-  ];
+  ]);
+
+  const showModal = () => {
+    setModal(true);
+  };
+
+  const handleCancel = () => {
+    setModal(false);
+  };
+
+  const handleOk = () => {
+    setModal(false);
+  };
 
   const columns = [
     {
