@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Layout, Image, Menu } from "antd";
 import LogoAdmin from "./assets/admin-panel-logo.png";
 import Users from "./components/Users";
+import Dashboard from "./components/Dashboard";
 
 const { Header, Sider, Content } = Layout;
 const items = [
@@ -22,7 +23,7 @@ const items = [
 const renderContent = (key) => {
   switch (key) {
     case "1":
-      return <div>Dashboard Content</div>;
+      return <Dashboard />;
 
     case "2":
       return <Users />;
