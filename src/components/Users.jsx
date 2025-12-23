@@ -3,6 +3,7 @@ import { Button, Modal, Form, Table, Input } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 const Users = () => {
+  const [form] = Form.useForm();
   const [modal, setModal] = useState(false);
   const [dataSource, setDataSource] = useState([
     {
@@ -28,7 +29,22 @@ const Users = () => {
   };
 
   const handleOk = () => {
-    setModal(false);
+    form
+      .validateFields()
+      .then((values) => {
+        setDataSource((prev) => [
+          ...prev,
+          {
+            key: prev.length > 0 ? prev[prev.length - 1].key + 1 : 1,
+            name: values.name,
+            age: values.age,
+            address: values.address,
+          },
+        ]);
+        setModal(false);
+        form.resetFields();
+      })
+      .catch(() => {});
   };
 
   const columns = [
@@ -61,7 +77,7 @@ const Users = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Form>
+        <Form form={form}>
           <Form.Item
             label="Name:"
             name="name"
