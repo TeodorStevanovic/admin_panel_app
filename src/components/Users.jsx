@@ -1,24 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Table, Input } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
 
 const Users = () => {
   const [form] = Form.useForm();
   const [modal, setModal] = useState(false);
-  const [dataSource, setDataSource] = useState([
-    {
-      key: "1",
-      name: "Teodor",
-      age: 23,
-      address: "Profesora Rasulica",
-    },
-    {
-      key: "2",
-      name: "Milan",
-      age: 54,
-      address: "Velizara Kosanovica",
-    },
-  ]);
+  const [dataSource, setDataSource] = useState([]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((data) => setDataSource(data));
+  }, []);
 
   const showModal = () => {
     setModal(true);
@@ -35,10 +28,12 @@ const Users = () => {
         setDataSource((prev) => [
           ...prev,
           {
-            key: prev.length > 0 ? prev[prev.length - 1].key + 1 : 1,
+            id: prev.length > 0 ? prev[prev.length - 1].id + 1 : 1,
             name: values.name,
-            age: values.age,
-            address: values.address,
+            email: values.email,
+            address: {
+              city: values.address.city
+            }
           },
         ]);
         setModal(false);
@@ -49,27 +44,32 @@ const Users = () => {
 
   const columns = [
     {
+      title: "Id",
+      dataIndex: "id",
+      key: "id"
+    },
+    {
       title: "Name",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
+      title: "City",
+      dataIndex: ["address", "city"],
+      key: "city",
     },
   ];
 
   return (
     <>
-      <Table dataSource={dataSource} columns={columns} />
+      <Table dataSource={dataSource} columns={columns} rowKey="id"/>
       <Button type="primary" onClick={showModal}>
-      <UserAddOutlined />
+        <UserAddOutlined />
       </Button>
       <Modal
         title="Basic Modal"
@@ -86,16 +86,16 @@ const Users = () => {
             <Input />
           </Form.Item>
           <Form.Item
-            label="Age"
-            name="age"
+            label="Email"
+            name="email"
             rules={[{ required: true, message: "Please input age." }]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            label="Address"
-            name="address"
+            label="City"
+            name={["address", "city"]}
             rules={[{ required: true, message: "Please input address." }]}
           >
             <Input />
