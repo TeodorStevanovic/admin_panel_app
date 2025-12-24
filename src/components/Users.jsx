@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Table, Input } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { UserAddOutlined } from "@ant-design/icons";
 
 const Users = () => {
   const [form] = Form.useForm();
@@ -69,7 +69,7 @@ const Users = () => {
     <>
       <Table dataSource={dataSource} columns={columns} />
       <Button type="primary" onClick={showModal}>
-        <PlusOutlined />
+      <UserAddOutlined />
       </Button>
       <Modal
         title="Basic Modal"
