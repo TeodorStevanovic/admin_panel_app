@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout, Image, Menu } from "antd";
 import LogoAdmin from "./assets/admin-panel-logo.png";
 import Users from "./components/Users";
@@ -20,24 +20,32 @@ const items = [
   },
 ];
 
-const renderContent = (key) => {
-  switch (key) {
-    case "1":
-      return <Dashboard />;
-
-    case "2":
-      return <Users />;
-
-    case "3":
-      return <div>Settings Content</div>;
-
-    default:
-      return <div>Default Content</div>;
-  }
-};
-
 function App() {
   const [selectItem, setSelectItem] = useState("1");
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, []);
+
+  const renderContent = (key) => {
+    switch (key) {
+      case "1":
+        return <Dashboard users={users} />;
+
+      case "2":
+        return <Users dataSource={users} setDataSource={setUsers} />;
+
+      case "3":
+        return <div>Settings Content</div>;
+
+      default:
+        return <div>Default Content</div>;
+    }
+  };
 
   return (
     <Layout style={{ minHeight: "100vh" }}>

@@ -2,14 +2,14 @@ import React from "react";
 import { Row, Card, Col, Statistic } from "antd";
 import { UserOutlined } from '@ant-design/icons';
 
-const Dashboard = () => {
+const Dashboard = ({users}) => {
   return (
     <>
       <Row>
         <Col span={8}>
           <Card>
             <UserOutlined />
-            <Statistic title="Total Users:" value="10" />
+            <Statistic title="Total Users:" value={users.length} />
           </Card>
         </Col>
         <Col span={8}>

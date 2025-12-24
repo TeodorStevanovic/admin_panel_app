@@ -2,16 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Table, Input } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
 
-const Users = () => {
+const Users = ({ dataSource, setDataSource }) => {
   const [form] = Form.useForm();
   const [modal, setModal] = useState(false);
-  const [dataSource, setDataSource] = useState([]);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => setDataSource(data));
-  }, []);
 
   const showModal = () => {
     setModal(true);
@@ -32,8 +25,8 @@ const Users = () => {
             name: values.name,
             email: values.email,
             address: {
-              city: values.address.city
-            }
+              city: values.address.city,
+            },
           },
         ]);
         setModal(false);
@@ -46,7 +39,7 @@ const Users = () => {
     {
       title: "Id",
       dataIndex: "id",
-      key: "id"
+      key: "id",
     },
     {
       title: "Name",
@@ -67,7 +60,7 @@ const Users = () => {
 
   return (
     <>
-      <Table dataSource={dataSource} columns={columns} rowKey="id"/>
+      <Table dataSource={dataSource} columns={columns} rowKey="id" />
       <Button type="primary" onClick={showModal}>
         <UserAddOutlined />
       </Button>
