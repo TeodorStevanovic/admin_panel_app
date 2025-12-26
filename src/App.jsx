@@ -23,6 +23,8 @@ const items = [
 function App() {
   const [selectItem, setSelectItem] = useState("1");
 
+  const [theme, setTheme] = useState("light");
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
