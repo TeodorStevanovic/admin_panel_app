@@ -3,6 +3,7 @@ import { Layout, Image, Menu } from "antd";
 import LogoAdmin from "./assets/admin-panel-logo.png";
 import Users from "./components/Users";
 import Dashboard from "./components/Dashboard";
+import Settings from "./components/Settings";
 
 const { Header, Sider, Content } = Layout;
 const items = [
@@ -42,7 +43,7 @@ function App() {
         return <Users dataSource={users} setDataSource={setUsers} />;
 
       case "3":
-        return <div>Settings Content</div>;
+        return <Settings theme={theme} setTheme={setTheme}/>;
 
       default:
         return <div>Default Content</div>;
