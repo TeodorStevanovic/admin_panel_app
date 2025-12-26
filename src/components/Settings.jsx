@@ -3,7 +3,7 @@ import { Switch, Col, Row } from "antd";
 
 const Settings = ({ theme, setTheme }) => {
   const changeTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    setTheme((theme) => (theme === "light" ? "dark" : "light"));
   };
   return (
     <div

@@ -40,10 +40,10 @@ function App() {
         return <Dashboard users={users} />;
 
       case "2":
-        return <Users dataSource={users} setDataSource={setUsers} />;
+        return <Users dataSource={users} setDataSource={setUsers} theme={theme} />;
 
       case "3":
-        return <Settings theme={theme} setTheme={setTheme}/>;
+        return <Settings theme={theme} setTheme={setTheme} />;
 
       default:
         return <div>Default Content</div>;
@@ -51,7 +51,13 @@ function App() {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout
+      style={{
+        minHeight: "100vh",
+        backgroundColor: theme === "dark" ? "#001529" : "#fff",
+        color: theme === "dark" ? "#fff" : "#000",
+      }}
+    >
       <Header
         style={{
           backgroundColor: "#001529",
@@ -70,7 +76,13 @@ function App() {
             items={items}
           />
         </Sider>
-        <Content style={{ padding: "20px" }}>
+        <Content
+          style={{
+            padding: "20px",
+            backgroundColor: theme === "dark" ? "#001529" : "#fff",
+            color: theme === "dark" ? "#fff" : "#000",
+          }}
+        >
           {renderContent(selectItem)}
         </Content>
       </Layout>

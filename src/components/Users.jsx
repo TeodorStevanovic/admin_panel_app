@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Table, Input } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
 
-const Users = ({ dataSource, setDataSource }) => {
+const Users = ({ dataSource, setDataSource, theme }) => {
   const [form] = Form.useForm();
   const [modal, setModal] = useState(false);
 
@@ -60,7 +60,11 @@ const Users = ({ dataSource, setDataSource }) => {
 
   return (
     <>
-      <Table dataSource={dataSource} columns={columns} rowKey="id" />
+      <Table
+        dataSource={dataSource}
+        columns={columns}
+        rowKey="id"
+      />
       <Button type="primary" onClick={showModal}>
         <UserAddOutlined />
       </Button>
