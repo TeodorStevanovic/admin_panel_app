@@ -29,9 +29,17 @@ function App() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
+    const savedUsers = localStorage.getItem("users");
+    if (savedUsers) {
+      setUsers(JSON.parse(savedUsers));
+    } else {
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then((res) => res.json())
+        .then((data) => {
+          setUsers(data);
+          localStorage.setItem("users", JSON.stringify(data));
+        });
+    }
   }, []);
 
   const renderContent = (key) => {
@@ -40,7 +48,9 @@ function App() {
         return <Dashboard users={users} />;
 
       case "2":
-        return <Users dataSource={users} setDataSource={setUsers} theme={theme} />;
+        return (
+          <Users dataSource={users} setDataSource={setUsers} theme={theme} />
+        );
 
       case "3":
         return <Settings theme={theme} setTheme={setTheme} />;

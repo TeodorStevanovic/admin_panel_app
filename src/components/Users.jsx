@@ -18,17 +18,21 @@ const Users = ({ dataSource, setDataSource, theme }) => {
     form
       .validateFields()
       .then((values) => {
-        setDataSource((prev) => [
-          ...prev,
-          {
-            id: prev.length > 0 ? prev[prev.length - 1].id + 1 : 1,
-            name: values.name,
-            email: values.email,
-            address: {
-              city: values.address.city,
+        setDataSource((prev) => {
+          const updated = [
+            ...prev,
+            {
+              id: prev.length > 0 ? prev[prev.length - 1].id + 1 : 1,
+              name: values.name,
+              email: values.email,
+              address: {
+                city: values.address.city,
+              },
             },
-          },
-        ]);
+          ];
+          localStorage.setItem("users", JSON.stringify(updated));
+          return updated;
+        });
         setModal(false);
         form.resetFields();
       })
@@ -60,11 +64,7 @@ const Users = ({ dataSource, setDataSource, theme }) => {
 
   return (
     <>
-      <Table
-        dataSource={dataSource}
-        columns={columns}
-        rowKey="id"
-      />
+      <Table dataSource={dataSource} columns={columns} rowKey="id" />
       <Button type="primary" onClick={showModal}>
         <UserAddOutlined />
       </Button>
