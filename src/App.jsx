@@ -46,7 +46,6 @@ function App() {
     switch (key) {
       case "1":
         return <Dashboard users={users} />;
-
       case "2":
         return (
           <Users dataSource={users} setDataSource={setUsers} theme={theme} />

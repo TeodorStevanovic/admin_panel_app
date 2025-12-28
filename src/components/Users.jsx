@@ -39,6 +39,11 @@ const Users = ({ dataSource, setDataSource, theme }) => {
       .catch(() => {});
   };
 
+  const removeUser = (id) => {
+    const newUsers = dataSource.filter((user) => user.id !== id);
+    setDataSource(newUsers);
+  };
+
   const columns = [
     {
       title: "Id",
@@ -59,6 +64,14 @@ const Users = ({ dataSource, setDataSource, theme }) => {
       title: "City",
       dataIndex: ["address", "city"],
       key: "city",
+    },
+    {
+      title: "Delete User",
+      dataIndex: "id",
+      key: "deleteUser",
+      render: (id) => {
+        return <Button onClick={() => removeUser(id)}>Remove</Button>;
+      },
     },
   ];
 
