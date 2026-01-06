@@ -42,6 +42,7 @@ const Users = ({ dataSource, setDataSource, theme }) => {
   const removeUser = (id) => {
     const newUsers = dataSource.filter((user) => user.id !== id);
     setDataSource(newUsers);
+    localStorage.setItem("users", JSON.stringify(newUsers));
   };
 
   const columns = [
