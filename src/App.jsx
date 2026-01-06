@@ -26,6 +26,13 @@ function App() {
 
   const [theme, setTheme] = useState("light");
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
